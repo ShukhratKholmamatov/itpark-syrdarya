@@ -45,17 +45,18 @@ export default async function TeamPage({
                     {member.role[locale]}
                   </p>
                   <div className="mt-4 space-y-2 border-t border-ink/5 pt-4 text-sm">
-                    {member.phone && (
+                    {[member.phone, member.phone2].filter(Boolean).map((phone) => (
                       <a
-                        href={`tel:${member.phone.replace(/\s/g, "")}`}
+                        key={phone}
+                        href={`tel:${phone!.replace(/\s/g, "")}`}
                         className="flex items-center gap-2.5 text-ink-muted transition hover:text-brand"
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0">
                           <path d="M4 5c0 8 7 15 15 15l2-3-4-2-2 2c-3-1.5-5.5-4-7-7l2-2-2-4-4 1z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
                         </svg>
-                        {member.phone}
+                        {phone}
                       </a>
-                    )}
+                    ))}
                     {member.email && (
                       <a
                         href={`mailto:${member.email}`}

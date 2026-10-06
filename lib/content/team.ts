@@ -1,86 +1,75 @@
 import type { Locale } from "../i18n";
 
 export interface TeamMember {
-  /** Replace with the real full name */
   name: string;
   photo: string;
   role: Record<Locale, string>;
   phone?: string;
+  phone2?: string;
   email?: string;
   telegram?: string;
 }
 
 /**
- * NOTE: These are placeholder names, roles and contacts.
- * Replace `name`, `photo` (drop real photos into /public/images/team),
- * and contact details with the real IT Park Sirdaryo management team.
+ * IT Park Sirdaryo management team.
+ * Photos are placeholder initial-avatars — replace the files in
+ * /public/images/team/ (keep the same filenames) with real photos.
  */
 export const team: TeamMember[] = [
   {
-    name: "Ism Familiya",
-    photo: "/images/team/director.webp",
+    name: "Xurshid Suvonov",
+    photo: "/images/team/suvonov.webp",
     role: {
-      uz: "Direktor",
-      ru: "Директор",
-      en: "Director",
+      uz: "Filial boshlig‘i",
+      ru: "Руководитель филиала",
+      en: "Branch Director",
     },
-    phone: "+998 00 000 00 00",
-    email: "director@itpark-sirdaryo.uz",
-    telegram: "@itpark_sirdaryo",
+    phone: "+998 99 477 47 49",
+    email: "x.suvonov@outsource.gov.uz",
   },
   {
-    name: "Ism Familiya",
-    photo: "/images/team/deputy.webp",
+    name: "Ali Farhodov",
+    photo: "/images/team/farhodov.webp",
     role: {
-      uz: "Direktor o‘rinbosari",
-      ru: "Заместитель директора",
-      en: "Deputy Director",
+      uz: "Loyihalar bo‘yicha menejer",
+      ru: "Менеджер по проектам",
+      en: "Project Manager",
     },
-    phone: "+998 00 000 00 00",
-    email: "deputy@itpark-sirdaryo.uz",
+    phone: "+998 99 374 09 66",
+    email: "a.farhodov@outsource.gov.uz",
   },
   {
-    name: "Ism Familiya",
-    photo: "/images/team/education.webp",
+    name: "Mirbobojon G‘aybullayev",
+    photo: "/images/team/gaybullayev.webp",
     role: {
-      uz: "Ta’lim va loyihalar bo‘limi boshlig‘i",
-      ru: "Руководитель отдела образования и проектов",
-      en: "Head of Education & Projects",
+      uz: "Startaplar bo‘yicha bosh menejer",
+      ru: "Главный менеджер по стартапам",
+      en: "Chief Startup Manager",
     },
-    phone: "+998 00 000 00 00",
-    email: "education@itpark-sirdaryo.uz",
+    phone: "+998 97 275 23 95",
+    phone2: "+998 94 917 27 57",
+    email: "m.gaybullayev@outsource.gov.uz",
   },
   {
-    name: "Ism Familiya",
-    photo: "/images/team/residents.webp",
+    name: "Axror Narzullayev",
+    photo: "/images/team/narzullayev.webp",
     role: {
-      uz: "Rezidentlar va hamkorlik bo‘limi boshlig‘i",
-      ru: "Руководитель отдела резидентов и партнёрств",
-      en: "Head of Residents & Partnerships",
+      uz: "Startaplar bo‘yicha bosh menejer",
+      ru: "Главный менеджер по стартапам",
+      en: "Chief Startup Manager",
     },
-    phone: "+998 00 000 00 00",
-    email: "residents@itpark-sirdaryo.uz",
+    phone: "+998 99 493 82 11",
+    email: "a.narzullayev@outsource.gov.uz",
   },
   {
-    name: "Ism Familiya",
-    photo: "/images/team/community.webp",
+    name: "Umrzoq Valiyev",
+    photo: "/images/team/valiyev.webp",
     role: {
-      uz: "Yoshlar va hamjamiyat yetakchisi",
-      ru: "Лидер по работе с молодёжью и сообществом",
-      en: "Youth & Community Lead",
+      uz: "Infratuzilma bo‘yicha menejer",
+      ru: "Менеджер по инфраструктуре",
+      en: "Infrastructure Manager",
     },
-    phone: "+998 00 000 00 00",
-    email: "community@itpark-sirdaryo.uz",
-  },
-  {
-    name: "Ism Familiya",
-    photo: "/images/team/marketing.webp",
-    role: {
-      uz: "Marketing va PR yetakchisi",
-      ru: "Лидер по маркетингу и PR",
-      en: "Marketing & PR Lead",
-    },
-    phone: "+998 00 000 00 00",
-    email: "marketing@itpark-sirdaryo.uz",
+    phone: "+998 90 047 57 40",
+    email: "o.valiev@outsource.gov.uz",
   },
 ];
