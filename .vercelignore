@@ -1,0 +1,9 @@
+# High-res source assets + logobook are kept in the repo for reference
+# but are not needed at runtime (optimized copies live in /public).
+assets/
+
+# Local SQLite + uploads never belong in a serverless deploy.
+prisma/*.db
+prisma/*.db-journal
+public/uploads/cv/*
+public/uploads/news/*

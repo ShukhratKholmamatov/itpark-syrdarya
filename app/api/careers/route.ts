@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { prisma } from "@/lib/db";
+import { saveUpload } from "@/lib/storage";
 import { sendMessage, sendDocument, escapeHtml } from "@/lib/telegram";
 
 export const runtime = "nodejs";
@@ -36,10 +36,7 @@ export async function POST(req: NextRequest) {
       const safeName =
         fullName.replace(/[^a-zA-Z0-9]+/g, "_").slice(0, 40) || "cv";
       cvFilename = `${Date.now()}_${safeName}${ext}`;
-      const dir = path.join(process.cwd(), "public", "uploads", "cv");
-      await mkdir(dir, { recursive: true });
-      await writeFile(path.join(dir, cvFilename), cvBuffer);
-      cvPath = `/uploads/cv/${cvFilename}`;
+      cvPath = await saveUpload(cvBuffer, cvFilename, "cv");
     }
 
     const app = await prisma.careerApplication.create({

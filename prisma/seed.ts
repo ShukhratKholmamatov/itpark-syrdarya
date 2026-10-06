@@ -1,9 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-
-const prisma = new PrismaClient();
+import { createPrisma } from "../lib/db";
 
 async function main() {
+  const prisma = createPrisma();
   const username = process.env.ADMIN_USERNAME || "admin";
   const password = process.env.ADMIN_PASSWORD || "admin12345";
 
@@ -16,7 +15,6 @@ async function main() {
   });
   console.log(`✅ Admin user ready: "${username}"`);
 
-  // Seed one welcome news post if there are none yet.
   const count = await prisma.newsPost.count();
   if (count === 0) {
     await prisma.newsPost.create({
@@ -41,13 +39,14 @@ async function main() {
       },
     });
     console.log("✅ Seeded welcome news post");
+  } else {
+    console.log("ℹ️  News posts already exist — skipping welcome post.");
   }
+
+  await prisma.$disconnect();
 }
 
-main()
-  .then(() => prisma.$disconnect())
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+main().catch(async (e) => {
+  console.error(e);
+  process.exit(1);
+});

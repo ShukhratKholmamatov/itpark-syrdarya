@@ -2,10 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import bcrypt from "bcryptjs";
 import { prisma } from "./db";
+import { saveUpload } from "./storage";
 import {
   createSession,
   setSessionCookie,
@@ -66,10 +66,7 @@ async function saveCover(file: FormDataEntryValue | null): Promise<string | null
   if (file.size > 8 * 1024 * 1024) return null;
   const buffer = Buffer.from(await file.arrayBuffer());
   const name = `${Date.now()}_${Math.random().toString(36).slice(2, 8)}${ext}`;
-  const dir = path.join(process.cwd(), "public", "uploads", "news");
-  await mkdir(dir, { recursive: true });
-  await writeFile(path.join(dir, name), buffer);
-  return `/uploads/news/${name}`;
+  return saveUpload(buffer, name, "news");
 }
 
 function readPostFields(formData: FormData) {

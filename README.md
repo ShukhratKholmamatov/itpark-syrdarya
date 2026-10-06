@@ -146,13 +146,35 @@ assets/                # original high-res source assets + logobook
 
 ---
 
-## 🌐 Deployment notes
+## 🌐 Deployment (Vercel + Turso + Blob)
 
-- SQLite is great for a single server. For multi-instance hosting, switch the
-  Prisma `datasource` to PostgreSQL/MySQL and set `DATABASE_URL`.
-- `public/uploads/` (news covers + CVs) must be on **persistent storage** — on
-  ephemeral platforms (e.g. Vercel) use external storage (S3/R2) or a VM/VPS.
-- Always set a strong `AUTH_SECRET` and `ADMIN_PASSWORD` in production.
+Vercel is serverless (ephemeral, read-only filesystem), so the app uses:
+- **Turso** (libSQL, SQLite-compatible) instead of the local SQLite file — enabled
+  automatically when `TURSO_DATABASE_URL` is set.
+- **Vercel Blob** for CV + news-cover uploads — enabled when `BLOB_READ_WRITE_TOKEN`
+  is present (injected automatically once you connect a Blob store).
+
+Locally, neither is needed: it falls back to the SQLite file + `public/uploads`.
+
+### Steps
+1. **Create a Turso database** at [turso.tech](https://turso.tech) → copy the
+   **database URL** (`libsql://…`) and an **auth token**.
+2. **Apply schema + seed the admin** to Turso (run once, locally):
+   ```powershell
+   $env:TURSO_DATABASE_URL="libsql://<your-db>.turso.io"
+   $env:TURSO_AUTH_TOKEN="<token>"
+   npm run turso:setup
+   ```
+3. **Import the repo** on Vercel (or `vercel` CLI) and add a **Blob store**
+   (Storage tab) — this injects `BLOB_READ_WRITE_TOKEN`.
+4. **Set environment variables** on Vercel:
+   `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `AUTH_SECRET`, `ADMIN_USERNAME`,
+   `ADMIN_PASSWORD`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ZERO_RISK_CHAT_ID`,
+   `TELEGRAM_CAREERS_CHAT_ID`, `NEXT_PUBLIC_SITE_URL`.
+   (`DATABASE_URL` can stay `file:./dev.db`; it is ignored when Turso is set.)
+5. **Deploy.** The build runs `prisma generate && next build`.
+
+> Always set a strong `AUTH_SECRET` and `ADMIN_PASSWORD` in production.
 
 ---
 
