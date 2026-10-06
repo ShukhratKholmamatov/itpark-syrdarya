@@ -31,3 +31,5 @@ npm-debug.log*
 
 # original high-res source assets (kept out of deploy)
 # /assets  <- keep in repo for reference
+
+.vercel
