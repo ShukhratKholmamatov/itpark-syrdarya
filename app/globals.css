@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Manrope (self-hosted fallback for Gilroy) ── */
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-cyrillic-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-latin-500-normal.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-cyrillic-500-normal.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-latin-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-cyrillic-600-normal.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-cyrillic-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-latin-800-normal.woff2") format("woff2");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope/manrope-cyrillic-800-normal.woff2") format("woff2");
+  font-weight: 800; font-style: normal; font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/*
+ * Gilroy is the brand typeface (per the IT Park logobook).
+ * It is a licensed font, so files are NOT bundled. To use the real Gilroy,
+ * drop the woff2 files into /public/fonts/gilroy/ with these names and the
+ * @font-face rules below will pick them up automatically. Until then the site
+ * gracefully falls back to Manrope (loaded via next/font), a close geometric sans.
+ */
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy/Gilroy-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy/Gilroy-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy/Gilroy-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy/Gilroy-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy/Gilroy-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/gilroy/Gilroy-Heavy.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --brand: #7dba28;
+  --ink: #1e1e1e;
+  --mist: #d9d9d9;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+  h1, h2, h3, h4, h5 {
+    @apply font-extrabold tracking-tight;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--brand);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold
+           transition-all duration-200 focus:outline-none focus-visible:ring-2
+           focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white hover:bg-brand-600 hover:shadow-card;
+  }
+  .btn-dark {
+    @apply btn bg-ink text-white hover:bg-ink-soft;
+  }
+  .btn-outline {
+    @apply btn border-2 border-ink/15 bg-white text-ink hover:border-brand hover:text-brand;
+  }
+  .btn-ghost {
+    @apply btn text-ink hover:bg-mist-light;
+  }
+  .kicker {
+    @apply inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.18em] text-brand-600;
+  }
+  .card {
+    @apply rounded-brand border border-ink/[0.06] bg-white shadow-soft;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+  .field-input {
+    @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink
+           placeholder:text-ink-muted/60 outline-none transition
+           focus:border-brand focus:ring-2 focus:ring-brand/20;
+  }
+  /* Subtle brand "matrix" dot grid background (from the logobook pattern) */
+  .bg-matrix {
+    background-image: radial-gradient(
+      rgba(125, 186, 40, 0.14) 1.4px,
+      transparent 1.4px
+    );
+    background-size: 22px 22px;
+  }
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0
+           after:bg-brand after:transition-all hover:after:w-full;
+  }
+}
+
+/* Rich-text rendered news body */
+.prose-news {
+  @apply text-ink-soft leading-relaxed;
+}
+.prose-news p {
+  @apply mb-4;
+}
+.prose-news h2 {
+  @apply mb-3 mt-8 text-2xl font-extrabold text-ink;
+}
+.prose-news h3 {
+  @apply mb-2 mt-6 text-xl font-bold text-ink;
+}
+.prose-news ul {
+  @apply mb-4 ml-5 list-disc space-y-1;
+}
+.prose-news ol {
+  @apply mb-4 ml-5 list-decimal space-y-1;
+}
+.prose-news a {
+  @apply font-semibold text-brand-600 underline;
+}
+.prose-news img {
+  @apply my-6 rounded-brand;
+}

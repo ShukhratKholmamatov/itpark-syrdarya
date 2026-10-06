@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# env
+.env
+.env*.local
+
+# database
+/prisma/*.db
+/prisma/*.db-journal
+/prisma/dev.db*
+
+# uploads (user generated)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.vscode/*
+!.vscode/extensions.json
+
+# original high-res source assets (kept out of deploy)
+# /assets  <- keep in repo for reference
