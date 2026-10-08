@@ -33,3 +33,4 @@ npm-debug.log*
 # /assets  <- keep in repo for reference
 
 .vercel
+.env*.local
